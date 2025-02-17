@@ -5,6 +5,7 @@ scikit-learn>=1.2.2
 xgboost>=1.7.5
 shap>=0.41.0
 langchain>=0.0.200
+langchain_community
 openai>=0.27.8
 joblib>=1.2.0
 faker>=18.9.0 

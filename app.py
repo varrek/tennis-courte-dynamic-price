@@ -16,7 +16,16 @@ def initialize_session_state():
         st.session_state.processor.preprocessor = preprocessor
     
     if 'text_processor' not in st.session_state:
-        st.session_state.text_processor = TextProcessor(st.secrets["OPENAI_API_KEY"])
+        try:
+            api_key = st.secrets.get("OPENAI_API_KEY")
+            if not api_key:
+                st.warning("OpenAI API key not found. Natural Language processing will be disabled.")
+                st.session_state.text_processor = None
+            else:
+                st.session_state.text_processor = TextProcessor(api_key)
+        except Exception as e:
+            st.warning("Error initializing Text Processor. Natural Language processing will be disabled.")
+            st.session_state.text_processor = None
 
 def main():
     st.title("Tennis Court Price Predictor")
@@ -95,6 +104,10 @@ def show_prediction_page():
                 show_prediction_results(input_data)
     
     with tab2:
+        if st.session_state.text_processor is None:
+            st.error("Natural Language processing is currently disabled. Please configure OpenAI API key in Streamlit secrets.")
+            return
+            
         # Add example prompts
         st.subheader("Example Prompts")
         examples = {

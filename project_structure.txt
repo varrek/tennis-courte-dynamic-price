@@ -1,0 +1,17 @@
+tennis_price_predictor/
+├── data/
+│   └── tennis_bookings.csv
+├── models/
+│   └── trained_model.joblib
+├── src/
+│   ├── __init__.py
+│   ├── data_generator.py
+│   ├── data_processor.py
+│   ├── model_trainer.py
+│   ├── price_predictor.py
+│   └── text_processor.py
+├── .env
+├── app.py
+├── requirements.txt
+├── train_model.py
+└── README.md 
